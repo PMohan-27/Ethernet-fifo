@@ -1,6 +1,6 @@
 `default_nettype 
 
-module (
+module fifo_sync(
 
     input wire i_clk,
     input wire i_rstn,             //active low reset

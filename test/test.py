@@ -11,8 +11,8 @@ async def test_fifo_sync(dut):
     """Sample test that always passes - no verification"""
     dut._log.info("Start FIFO Sync Test")
 
-    # Set the clock period to 10 us (100 KHz)
-    clock = Clock(dut.i_clk, 10, units="us")
+    # Set the clock period to 8 ns (125 MHz)
+    clock = Clock(dut.i_clk, 8, units="ns")
     cocotb.start_soon(clock.start())
 
     # Reset
