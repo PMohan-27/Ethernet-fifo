@@ -13,7 +13,10 @@ Explain how your project works
 
 ## How to test
 
-Explain how to use your project
+```bash
+cd test
+make
+```
 
 ## Weekly Progress
 
@@ -23,7 +26,7 @@ Annotate your weekly progress here to help us keep on track! For each week, brie
 
 | Week | Notes |
 |---|---|
-| March 4-10 | |
+| March 4-10 | I noticed that the fifo_sync ports dont match the docs, should I change them?|
 | March 11-17 | |
 | March 18-24 | |
 | March 25 - Apr 1 | |
@@ -33,7 +36,7 @@ Annotate your weekly progress here to help us keep on track! For each week, brie
 
 | Week | Notes |
 |---|---|
-| March 4-10 | |
+| March 4-10 | Added cocotb verification for fifo_sync module, [test.py](../test/test.py) |
 | March 11-17 | |
 | March 18-24 | |
 | March 25 - Apr 1 | |
