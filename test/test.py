@@ -46,6 +46,7 @@ async def test_fifo_sync_empty_full_flags(dut):
         await ClockCycles(dut.i_clk, 1)
     dut.i_write.value = 0
 
+    await ClockCycles(dut.i_clk, 1)
     assert dut.ow_full.value == 1,  "should be full"
     assert dut.ow_empty.value == 0, "should not be empty when full"
 
@@ -63,6 +64,7 @@ async def test_fifo_sync_data_order(dut):
     
     dut.i_write.value = 0
     dut.i_read.value = 1
+    await ClockCycles(dut.i_clk, 1)
     
     for expected_value in data:
         await ClockCycles(dut.i_clk, 1)
@@ -83,6 +85,8 @@ async def test_fifo_sync_read_counter_increment(dut):
     dut.i_write.value = 0
 
     dut.i_read.value = 1
+    await ClockCycles(dut.i_clk, 1)
+
     await ClockCycles(dut.i_clk, 1)
     assert dut.ow_data.value == 0x0A, f"expected 0x0A got {dut.ow_data.value}"
     timetag_1 = int(dut.or_timetag.value)

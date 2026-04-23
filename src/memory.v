@@ -12,5 +12,31 @@ module memory (
     output reg ow_empty,           //signal to indicate FIFO is empty
     output reg ow_full             //signal to indicate FIFO is full
 );
+
+    reg [7:0] mem [0:63];
+    reg [6:0] w_ptr, r_ptr;
+
+    assign ow_empty = (w_ptr == r_ptr);
+    assign ow_full = (w_ptr[5:0] == r_ptr[5:0]) && (w_ptr[6] != r_ptr[6]);
+    always @(posedge i_clk) begin
+        if(!i_rstn) begin
+            ow_data <= '0;
+            // ow_empty <= 1'b1;
+            // ow_full <= '0;
+
+            w_ptr <= '0;
+            r_ptr <= '0;
+        end else begin
+            if(i_write && !ow_full) begin
+                mem[w_ptr[5:0]] <= iw_data;
+                w_ptr <= w_ptr + 7'd1;
+            end
+
+            if(i_read && !ow_empty) begin
+                ow_data <= mem[r_ptr[5:0]];
+                r_ptr <= r_ptr + 7'd1;
+            end
+        end
+    end
 endmodule
 
